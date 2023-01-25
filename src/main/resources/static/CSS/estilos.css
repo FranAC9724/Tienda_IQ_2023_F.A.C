@@ -1,0 +1,127 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 24 ene 2023, 18:43:21
+    Author     : Fran Araya Carvajal
+*/
+
+#encabezado{
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 8%;
+    width: 100%;
+    background-color: #496d8D;
+    color: white;
+    padding-left: 15%;
+}
+
+#encabezado h1{
+    display: inline;
+}
+
+.descripcion{
+    font-size: 18px;
+}
+
+#menu{
+    position: absolute;
+    top:8%;
+    left: 0;
+    height: 4%;
+    width: 100%;
+    background-color: #9B8030;
+    color: white;
+}
+
+#menu a:visited{
+    color: navy
+}
+
+#menu a:hover{
+    background-color:green;
+    color:white;
+}
+
+#barraLateral{
+    position: absolute;
+    top:12%;
+    left: 0;
+    height: 81%;
+    width: 20%;
+    background-color: #ffde7e;
+    color: black;
+}
+
+#contenido{
+    position: absolute;
+    top:12%;
+    left: 20%;
+    height: 81%;
+    width: 80%;
+    background-color: #8fc6ff;
+    color: black;
+    overflow: auto;
+}
+
+#piePagina{
+    position: absolute;
+    bottom:0%;
+    left: 0%;
+    height: 7%;
+    width: 100%;
+    background-color: aquamarine;
+    color: black;
+    text-align: center;
+}
+
+.lineaDireccion{
+    display: inline;
+}
+
+#encabezadoTabla{
+    font-size: 20px;
+    color: yellow;
+    background: blue
+}
+
+#tablaResumen tr{
+    font-size: 20px;
+    
+}
+
+#tablaResumen tr:nth-child(odd){
+    background: coral;
+    color: white
+    
+}
+
+#tablaResumen tr:nth-child(even){
+    background: white;
+    color: darkmagenta
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
