@@ -13,13 +13,19 @@
                 <p>Correo: <span th:text="${cliente.correo}"></span></p>
                 <p>Telefono: <span th:text="${cliente.telefono}"></span></p>
         -->
+        <!--La arroba es para rutas y el signo de dolar para modelo de datos-->
+        
+        <header th:replace="layout/plantilla :: header"/>
         <h1>Clientes</h1>
-        <table border="1">
+        <a th:href="@{/nuevoCliente}">Nuevo Cliente</a>
+        <div th:if="${clientes != null  and !clientes.empty}">
+            <table border="1">
             <thead>
             <th>Nombre</th>
             <th>Apellidos</th>
             <th>Correo</th>
             <th>Telefono</th>
+            <th colspan="2">Acciones</th>
             </thead>
             <tbody>
                 <tr th:each="cliente : ${clientes}">
@@ -27,12 +33,16 @@
                     <td th:text="${cliente.apellidos}"></td>
                     <td th:text="${cliente.correo}"></td>
                     <td th:text="${cliente.telefono}"></td>
-
+                    <td><a th:href="@{/modificarCliente/} + ${cliente.idCliente}">Modificar</a></td>
+                    <td><a th:href="@{/eliminarCliente/} + ${cliente.idCliente}">Eliminar</a></td>
                 </tr>
             </tbody>
-            
         </table>
-        
+        </div>
+        <div th:if="${clientes == null  or clientes.empty}">
+            La lista no contiene datos...
+        </div>
+        <footer th:replace="layout/plantilla :: footer"/>
         
         
     </body>
