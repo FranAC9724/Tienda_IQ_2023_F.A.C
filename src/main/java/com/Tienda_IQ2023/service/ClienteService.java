@@ -21,5 +21,6 @@ public interface ClienteService {
     
     public void delete(Cliente cliente);
     
+    public List<Cliente> getClienteByApellidos(String apellido);
     
 }

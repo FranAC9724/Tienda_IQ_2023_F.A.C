@@ -9,6 +9,7 @@ import com.Tienda_IQ2023.dao.CreditoDao;
 import com.Tienda_IQ2023.domain.Cliente;
 import com.Tienda_IQ2023.domain.Credito;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,4 +61,12 @@ public class ClienteServiceImpl implements ClienteService {
         clienteDao.deleteById(cliente.getIdCliente());
     }
     
+    @Transactional(readOnly = true)
+    public List<Cliente> getClienteByApellidos(String apellido) {
+        return (List<Cliente>) clienteDao.findByApellidosLike("%"+apellido+"%");
+    }
+
+  
+    
+   
 }

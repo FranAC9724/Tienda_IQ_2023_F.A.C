@@ -19,11 +19,11 @@
                   </tr>
                </thead>
                <tbody>
-                  Index actualizado
-                  <tr th:each="articulo: $(articulos}">
+                  
+                  <tr th:each="articulo: ${articulos}">
                      <td th:text="${articulo.descripcion}"></td>
                      <td th:text="${#numbers.formatDecimal (articulo.precio,3,2)}" style="text-align: right"></td>
-                     <td><a th:href="@{/carrito/agregar/} + ${articulo.idArticulo}">Agregar</a></td>
+                     <td><a th:href="@{/articulo/modificar/} + ${articulo.idArticulo}">Modificar</a></td>
                   </tr>
                </tbody>
             </table>
