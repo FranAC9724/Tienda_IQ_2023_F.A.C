@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html xmlns: th="http://www.thymeleaf.org"
-   xmlns="http://www.w3.org/1999/xhtml">
-   <head>
-      <title>TechShop</title>
-      <meta charset="UTF-8"/>
-      <link href="/CSS/menu.css" rel="stylesheet" type="text/css"/>
+<html xmlns:sec="http://thymeleaf.org/extras/spring-security" 
+      xmlns: th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+   <head th:replace="layout/plantilla :: head">
+     <title>Techshop</title>
    </head>
    <body>
       <header th:replace="layout/plantilla :: header"/>
       <div class="contenido">
-         <h2>Nuestros Articulos</h2>
+         <h2 th:text="#{index.titulo}">Nuestros Articulos</h2>
          <div th:if="${articulos != null and !articulos.empty}">
             <table border="1">
                <thead>
                   <tr>
-                     <th>Descripcion</th>
-                     <th>Precio</th>
+                     <th th:text="#{articulo.descripcion}" >Descripcion</th>
+                     <th th:text="#{articulo.precio}" >Precio</th>
+                     <th th:text="#{articulo.comprar}" >Compra</th>
                   </tr>
                </thead>
                <tbody>
@@ -23,25 +23,15 @@
                   <tr th:each="articulo: ${articulos}">
                      <td th:text="${articulo.descripcion}"></td>
                      <td th:text="${#numbers.formatDecimal (articulo.precio,3,2)}" style="text-align: right"></td>
-                     <td><a th:href="@{/articulo/modificar/} + ${articulo.idArticulo}">Modificar</a></td>
+                     <td><a th:href="@{/carrito/agregar/} + ${articulo.idArticulo}" th:text="#{accion.agregar}">Agregar</a></td>
                   </tr>
                </tbody>
             </table>
          </div>
          <div th:if="${articulos == null or articulos.empty}">
-            No tenemos articulos que mostrar...
+             <p th:text="#{articulo.no_mostrar}">No tenemos articulos que mostrar...</p>
          </div>
       </div>
       <footer th:replace="layout/plantilla :: footer"/>
    </body>
 </html>
-
-<!--<p th:text="${MensajeSaludo}"></p> Esto renderiza el html -->
-        <!--        <h1>Un cliente</h1>
-                <p>Nombre: <span th:text="${cliente.nombre}"></span></p>
-                <p>Apellidos: <span th:text="${cliente.apellidos}"></span></p>
-                <p>Correo: <span th:text="${cliente.correo}"></span></p>
-                <p>Telefono: <span th:text="${cliente.telefono}"></span></p>
-        -->
-        <!--La arroba es para rutas y el signo de dolar para modelo de datos-->
-        
