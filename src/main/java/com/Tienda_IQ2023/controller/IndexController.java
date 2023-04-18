@@ -2,13 +2,22 @@
 package com.Tienda_IQ2023.controller;
 
 import com.Tienda_IQ2023.dao.ClienteDao;
+import com.Tienda_IQ2023.dao.UsuarioDao;
+import com.Tienda_IQ2023.domain.Carrito;
+import com.Tienda_IQ2023.domain.CarritoDetalle;
 import com.Tienda_IQ2023.domain.Cliente;
+import com.Tienda_IQ2023.domain.Usuario;
 import com.Tienda_IQ2023.service.ArticuloService;
+import com.Tienda_IQ2023.service.CarritoDetalleService;
+import com.Tienda_IQ2023.service.CarritoService;
 import com.Tienda_IQ2023.service.ClienteService;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,10 +39,51 @@ public class IndexController {
    @Autowired
    ArticuloService articuloService;
    
+   @Autowired
+   CarritoService carritoService;
+   
+   @Autowired
+   CarritoDetalleService carritoDetalleService;
+   
+   @Autowired
+   UsuarioDao usuarioDao;
+   
     @GetMapping("/") //Mapping de la ruta base
-    public String inicio(Model model) {
-       log.info("Proyecto con MVC");
+    public String inicio(Model model, HttpServletRequest request) {
 
+        //Obtener Usuario logueado
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails user = null;
+
+        if(principal instanceof UserDetails){
+            user = (UserDetails) principal;
+        }
+             
+        //Validar si usuario es cliente
+        boolean esCliente = false;
+        if(user!=null){
+            Usuario usuario = usuarioDao.findByUsername(user.getUsername());
+            
+            if (usuario.getIdCliente() != null && usuario.getIdCliente() != 0){
+           esCliente = true;
+            Carrito carrito = carritoService.getCarritoCliente(usuario.getIdCliente());
+        
+            request.getSession().setAttribute("idCliente", usuario.getIdUsuario());
+            request.getSession().setAttribute("idCarrito", carrito.getIdCarrito());
+            request.getSession().setAttribute("esCliente", esCliente);
+
+            List<CarritoDetalle> carritoDetalles = carritoDetalleService.getCarritoDetalles(carrito.getIdCarrito());
+            model.addAttribute("cantidadArticulosCarrito",carritoDetalles.size());
+            model.addAttribute("esCliente",esCliente);
+            
+        }
+ }
+        
+        
+        
+        
+        
+        
         var articulo = articuloService.getArticulos(true);
         //var clientes = Arrays.asList();
         model.addAttribute("articulos", articulo);

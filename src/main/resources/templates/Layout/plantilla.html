@@ -5,12 +5,12 @@
     <head th:fragment="head">
         <title>TechShop</title>
         <meta charset="UTF-8">
-        <link href="/CSS/menu.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+            <link href="/CSS/menu.css" rel="stylesheet" type="text/css"/>
+            <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+            <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+            <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+            <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+            <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
         <header th:fragment="header" class="header">
@@ -80,16 +80,13 @@
             </section>
         </header>
         <footer th:fragment="footer" class="position-fixed bottom-0 start-0 end-0 bg-info text-white mt-5 p-2">
-            <div class="container">
-                <div class="col">
-                    <p class="lead text-center">
-                        &COPY [[#{plantilla.derechos}]]
-
-                        <a th:href="@{/(lang=es)}">ES</a> | 
-
-                        <a th:href="@{/(lang=en)}">EN</a>
-                    </p>
-                </div>
+            <div>
+                &COPY [[#{plantilla.derechos}]]
+                <a th:href="@{/(lang=es)}">ES</a> 
+                <a th:href="@{/(lang=en)}">EN</a>
+                <form method="POST" th:action="@{/logout}" style="display:inline">
+                    <a href="#" onclick="this.parentNode.submit();">Logout</a>
+                </form>
             </div>
         </footer>
     </body>
